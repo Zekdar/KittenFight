@@ -32,23 +32,26 @@ namespace KittenFight
                 Fight(Player.CurrentUnit, Oponent.CurrentUnit);
             }
 
-            return GetResult();
+            return DuelResult;
         }
 
-        private DuelResult GetResult()
+        private DuelResult DuelResult
         {
-            if ((Player.CurrentUnit.IsAlive || Player.HasUnits) && !Oponent.CurrentUnit.IsAlive && !Oponent.HasUnits)
+            get
             {
-                // In case of a victory, we need to get all of the remaining units to complete the player's final sequence
-                while (Player.HasUnits)
-                    Player.GetNextUnit();
-                return DuelResult.Victory;
+                if ((Player.CurrentUnit.IsAlive || Player.HasUnits) && !Oponent.CurrentUnit.IsAlive && !Oponent.HasUnits)
+                {
+                    // In case of a victory, we need to get all of the remaining units to complete the player's final sequence
+                    while (Player.HasUnits)
+                        Player.GetNextUnit();
+                    return DuelResult.Victory;
+                }
+
+                if ((Oponent.CurrentUnit.IsAlive || Oponent.HasUnits) && !Player.CurrentUnit.IsAlive && !Player.HasUnits)
+                    return DuelResult.Defeat;
+
+                return DuelResult.Draw;
             }
-
-            if ((Oponent.CurrentUnit.IsAlive || Oponent.HasUnits) && !Player.CurrentUnit.IsAlive && !Player.HasUnits)
-                return DuelResult.Defeat;
-
-            return DuelResult.Draw;
         }
 
         private static void Fight(Unit playerUnit, Unit oponentUnit)
