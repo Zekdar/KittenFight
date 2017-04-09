@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KittenFight", "KittenFight\KittenFight.csproj", "{93621519-D124-4967-BA98-647732CE9973}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{94798665-2F04-40E2-8CD6-2CF8CB68F406}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93621519-D124-4967-BA98-647732CE9973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93621519-D124-4967-BA98-647732CE9973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93621519-D124-4967-BA98-647732CE9973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93621519-D124-4967-BA98-647732CE9973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94798665-2F04-40E2-8CD6-2CF8CB68F406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94798665-2F04-40E2-8CD6-2CF8CB68F406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94798665-2F04-40E2-8CD6-2CF8CB68F406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94798665-2F04-40E2-8CD6-2CF8CB68F406}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
