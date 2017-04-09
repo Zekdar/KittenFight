@@ -7,11 +7,11 @@ namespace KittenFight.Models
     {
         public Queue<Unit> Units { get; protected set; }
         public Unit CurrentUnit { get; protected set; }
-        public string OriginalSequence { get; protected set; }
+        public string GenuineSequence { get; protected set; }
 
         protected PlayerAbstract(string units)
         {
-            OriginalSequence = units;
+            GenuineSequence = units;
         }
 
         public bool HasUnits => Units.Any();

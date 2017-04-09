@@ -7,29 +7,29 @@ namespace KittenFight
 {
     public class Game
     {
-        private readonly Player _player;
-        private readonly Oponent _oponent;
-        private readonly Stack<string> _sequences;
+        public Player Player { get; set; }
+        public Oponent Oponent { get; set; }
+        private Stack<string> Sequences { get; set; }
 
         public Game(Player player, Oponent oponent)
         {
-            _player = player;
-            _oponent = oponent;
-            _sequences = new Stack<string>(Swapper.GetAllPermutations(_player.OriginalSequence));
+            Player = player;
+            Oponent = oponent;
+            Sequences = new Stack<string>(Swapper.GetAllPermutations(Player.GenuineSequence));
         }
 
-        private DuelResult Duel(Player player, Oponent oponent)
+        private DuelResult Duel()
         {
-            while (player.HasUnits && oponent.HasUnits
-                || player.CurrentUnit.IsAlive && oponent.HasUnits
-                || oponent.CurrentUnit.IsAlive && player.HasUnits)
+            while (Player.HasUnits && Oponent.HasUnits
+                || Player.CurrentUnit.IsAlive && Oponent.HasUnits
+                || Oponent.CurrentUnit.IsAlive && Player.HasUnits)
             {
-                if (oponent.CurrentUnit == null || !oponent.CurrentUnit.IsAlive)
-                    oponent.GetNextUnit();
-                if (player.CurrentUnit == null || !player.CurrentUnit.IsAlive)
-                    player.GetNextUnit();
+                if (Oponent.CurrentUnit == null || !Oponent.CurrentUnit.IsAlive)
+                    Oponent.GetNextUnit();
+                if (Player.CurrentUnit == null || !Player.CurrentUnit.IsAlive)
+                    Player.GetNextUnit();
 
-                Fight(player.CurrentUnit, oponent.CurrentUnit);
+                Fight(Player.CurrentUnit, Oponent.CurrentUnit);
             }
 
             return GetResult();
@@ -37,15 +37,15 @@ namespace KittenFight
 
         private DuelResult GetResult()
         {
-            if ((_player.CurrentUnit.IsAlive || _player.HasUnits) && !_oponent.CurrentUnit.IsAlive && !_oponent.HasUnits)
+            if ((Player.CurrentUnit.IsAlive || Player.HasUnits) && !Oponent.CurrentUnit.IsAlive && !Oponent.HasUnits)
             {
                 // In case of a victory, we need to get all of the remaining units to complete the player's final sequence
-                while (_player.HasUnits)
-                    _player.GetNextUnit();
+                while (Player.HasUnits)
+                    Player.GetNextUnit();
                 return DuelResult.Victory;
             }
 
-            if ((_oponent.CurrentUnit.IsAlive || _oponent.HasUnits) && !_player.CurrentUnit.IsAlive && !_player.HasUnits)
+            if ((Oponent.CurrentUnit.IsAlive || Oponent.HasUnits) && !Player.CurrentUnit.IsAlive && !Player.HasUnits)
                 return DuelResult.Defeat;
 
             return DuelResult.Draw;
@@ -71,7 +71,7 @@ namespace KittenFight
 
         private string GetNextSequence()
         {
-            return _sequences.Count == 0 ? null : _sequences.Pop();
+            return Sequences.Count == 0 ? null : Sequences.Pop();
         }
 
         public string GetPlayerBestSequence()
@@ -82,20 +82,20 @@ namespace KittenFight
 
             while (!string.IsNullOrEmpty(sequence))
             {
-                _player.SetUnits(sequence);
-                _player.FinalSequence = string.Empty;
-                _oponent.SetUnits(_oponent.OriginalSequence); // Resets the stack of units
+                Player.SetUnits(sequence);
+                Player.FinalSequence = string.Empty;
+                Oponent.SetUnits(Oponent.GenuineSequence); // Resets the stack of units
 
-                DuelResult duelResult = Duel(_player, _oponent);
+                DuelResult duelResult = Duel();
 
                 if (duelResult == DuelResult.Victory)
                 {
-                    victorySequence = _player.FinalSequence;
+                    victorySequence = Player.FinalSequence;
                     break;
                 }
 
                 if (duelResult == DuelResult.Draw && string.IsNullOrEmpty(drawSequence))
-                    drawSequence = _player.FinalSequence;
+                    drawSequence = Player.FinalSequence;
 
                 sequence = GetNextSequence();
             }
@@ -105,7 +105,7 @@ namespace KittenFight
 
             return !string.IsNullOrEmpty(drawSequence)
                 ? string.Concat("=", drawSequence)
-                : string.Concat("-", _player.OriginalSequence);
+                : string.Concat("-", Player.GenuineSequence);
         }
     }
 }
