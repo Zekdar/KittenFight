@@ -4,7 +4,7 @@ This repo is my solution for the Battle Dev of March 2017 (https://questionsacm.
 
 # Code review
 
-Please review my code, tell me what you think about it and what could be done better. This is why I decided to share my code so I can improve my code skills :)
+Please review my code, tell me what you think about it and what could be done better according to you. This is why I decided to share my code, so I can improve my skills :)
 
 # Objective
 In this challenge, you need to determine the best possible outcome of a kitten fight. There are three kinds of kitten: Fire (F), Water (E), Plant (P). The fight results are as follows:
